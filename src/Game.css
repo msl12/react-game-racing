@@ -1,0 +1,79 @@
+.board {
+    width: 480px;
+    height: 800px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    border: #fff 5px solid;
+    border-radius: 10px;
+}
+
+.start {
+    background: url(/start.png) no-repeat;
+    width: 260px;
+    height: 86px;
+    position: absolute;
+    left: 50%;
+    top: 600px;
+    margin-left: -130px;
+    cursor: pointer;
+}
+
+.kilo {
+    background: url(/kilo.png) no-repeat;
+    width: 83px;
+    line-height: 100px;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #0979c1;
+    padding-right: 50px;
+}
+
+.road {
+    height: 800px;
+    position: absolute;
+    left: 50%;
+    margin-left: -160px;
+}
+
+.failbub {
+    -webkit-animation: failShow .5s ease;
+    width: 380px;
+    height: 240px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    margin-top: -130px;
+    z-index: 111;
+    display: block;
+}
+@-webkit-keyframes failShow {
+    0%{ -webkit-transform:translateY(250px);}
+    80%{ -webkit-transform:translateY(-12px);}
+    100%{ -webkit-transform:translateY(0);}
+}
+
+.failbub .failtext {
+    background: url(/failedNotice.png) no-repeat 50% 0;
+    width: 100%;
+    height: 116px;
+    display: block;
+}
+
+.failbub .retry {
+    background: url(/playAgainBtn.png) no-repeat;
+    width: 266px;
+    height: 99px;
+    display: block;
+    margin: 25px auto 0;
+    cursor: pointer;
+}

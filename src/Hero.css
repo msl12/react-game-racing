@@ -1,0 +1,52 @@
+.hero {
+    -webkit-transition: -webkit-transform .5s ease;
+    width: 142px;
+    height: 162px;
+    position: absolute;
+    bottom: 10px;
+    display: none;
+}
+
+.hero .light {
+    -webkit-animation: light .6s ease infinite;
+    background: url(/carLight.png) no-repeat 50%;
+    width: 142px;
+    height: 57px;
+    position: absolute;
+    top: -35px;
+    left: -4px;
+}
+@-webkit-keyframes light{
+	0%{opacity:1}
+	50%{opacity:0.3}
+	100%{opacity:1}
+}
+
+.hero .body {
+    background: url(/hero.png) no-repeat 50%;
+    height: 100%;
+}
+
+.play .hero {
+    -webkit-animation: show .5s ease;
+    display: block;
+}
+@-webkit-keyframes show{
+    0%{-webkit-transform: translateY(172px);}
+}
+
+.hero.right {
+    -webkit-transform: translateX(178px);
+}
+
+.hero.left {
+    -webkit-transform: translateX(0);
+}
+
+.crashed .hero .body {
+    background: url(/heroDied.png) no-repeat;
+}
+
+.crashed .hero .light{
+    display: none;
+}

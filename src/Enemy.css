@@ -1,0 +1,28 @@
+.enemy {
+    width: 142px;
+    position: absolute;
+
+    height: 160px;
+    top: -160px;
+}
+
+.enemy .body {
+    height: 100%;
+
+    background: url(/car.png) no-repeat 50%;
+}
+
+.enemy.speed {
+	-webkit-animation: speed 2.5s linear;
+}
+@-webkit-keyframes speed{
+	100%{-webkit-transform:translateY(1000px);}
+}
+
+.enemy.right {
+    left: 178px;
+}
+
+.crashed .enemy {
+	-webkit-animation-play-state: paused;
+}
