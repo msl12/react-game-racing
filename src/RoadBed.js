@@ -1,10 +1,8 @@
 import React from 'react';
 import './RoadBed.css';
 
-class RoadBed extends React.Component {
-	render() {
-		return <div className={this.props.gameState ? "roadbed roadRun" : "roadbed"}></div>;
-	}
+function RoadBed(props) {
+	return <div className={props.gameState ? "roadbed roadRun" : "roadbed"}></div>;
 }
 
 export default RoadBed;
