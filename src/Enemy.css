@@ -1,18 +1,44 @@
 .enemy {
     width: 142px;
     position: absolute;
-
-    height: 160px;
-    top: -160px;
 }
 
 .enemy .body {
     height: 100%;
-
-    background: url(/car.png) no-repeat 50%;
 }
 
-.enemy.speed {
+.enemy0,
+.enemy1 {
+    height: 160px;
+    top: -160px;
+}
+
+.enemy0 .body {
+    background: url(/car0.png) no-repeat 50%;
+}
+
+.enemy1 .body {
+    background: url(/car1.png) no-repeat 50%;
+}
+
+.enemy2 {
+    height: 220px;
+    top: -220px;
+}
+
+.enemy2 .body {
+    background: url(/car2.png) no-repeat 50%;
+}
+
+.enemy.speed0 {
+    -webkit-animation: speed 1s linear;
+}
+
+.enemy.speed1 {
+    -webkit-animation: speed 2s linear;
+}
+
+.enemy.speed2 {
 	-webkit-animation: speed 2.5s linear;
 }
 @-webkit-keyframes speed{

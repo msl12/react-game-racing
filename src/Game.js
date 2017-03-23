@@ -14,10 +14,12 @@ class Game extends React.Component {
       kilo: 0,
       enemyDirectionNum: 0,
       toTheEnd: true,
-      direction: "left"
+      direction: "left",
+      enemyType: 0,
+      enemySpeed: 0
     };
 
-    this.gameStart = this.gameStart.bind(this);
+    this.handleClickStartButton = this.handleClickStartButton.bind(this);
   }
 
   componentDidMount() {
@@ -107,12 +109,30 @@ class Game extends React.Component {
     EnemyTick = setInterval(() => {
       if (this.state.gameState === 1) {
         var enemyDirectionNum = Math.round(Math.random());
+        var enemyType = Math.floor(3 * Math.random());
+        var enemySpeed = Math.floor(3 * Math.random());
         this.setState({
           enemyDirectionNum : enemyDirectionNum,
-          toTheEnd: false
+          toTheEnd: false,
+          enemyType: enemyType,
+          enemySpeed: enemySpeed
         });
       }
     }, 3000);
+  }
+
+  handleClickStartButton() {
+    this.gameStart();
+
+    var help = document.createElement("P");
+    help.className = "help";
+    help.innerHTML = "你是逃犯，方向键控制左右";
+    var road = document.getElementById("road");
+    road.appendChild(help);
+
+    help.addEventListener("webkitAnimationEnd", () => {
+      road.removeChild(help);
+    });
   }
 
   render() {
@@ -127,14 +147,16 @@ class Game extends React.Component {
     return (
       <div id="board" className={boardClassName}>
         <RoadBed gameState={this.state.gameState} />
-        <div className={this.state.gameState ? "road play" : "road"}>
+        <div id="road" className={this.state.gameState ? "road play" : "road"}>
           <Hero direction={this.state.direction} />
           <Enemy
             gameState={this.state.gameState}
             enemyDirection={enemyDirection}
-            toTheEnd={this.state.toTheEnd} />
+            toTheEnd={this.state.toTheEnd}
+            enemyType={this.state.enemyType}
+            enemySpeed={this.state.enemySpeed} />
         </div>
-        <span className={this.state.gameState ? "start hide" : "start"} onClick={this.gameStart}></span>
+        <span className={this.state.gameState ? "start hide" : "start"} onClick={this.handleClickStartButton} />
         <span className="kilo">{this.state.kilo.toFixed(2)}</span>
       </div>
     );

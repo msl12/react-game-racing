@@ -73,3 +73,24 @@
     margin: 25px auto 0;
     cursor: pointer;
 }
+
+.help {
+    background: rgba(255,255,255,.8);
+    width: 224px;
+    line-height: 40px;
+    position: absolute;
+    left: 53px;
+    top: 50%;
+    color: #66757d;
+    border-radius: 30px;
+    text-align: center;
+    -webkit-animation: help 2s ease;
+    user-select: none;
+    cursor: default;
+}
+@-webkit-keyframes help{
+    0%{opacity: 0;}
+    40%{opacity: 1;}
+    80%{opacity: 1;}
+    100%{opacity: 0;}
+}
