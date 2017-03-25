@@ -76,17 +76,25 @@
 
 .help {
     background: rgba(255,255,255,.8);
-    width: 224px;
     line-height: 40px;
     position: absolute;
-    left: 53px;
     top: 50%;
     color: #66757d;
     border-radius: 30px;
     text-align: center;
-    -webkit-animation: help 2s ease;
+    -webkit-animation: help 3s ease;
     user-select: none;
     cursor: default;
+}
+
+.start-help {
+    width: 224px;
+    left: 53px;
+}
+
+.super-help {
+    width: 200px;
+    left: 62px;
 }
 @-webkit-keyframes help{
     0%{opacity: 0;}

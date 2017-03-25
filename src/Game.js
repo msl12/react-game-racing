@@ -16,7 +16,8 @@ class Game extends React.Component {
       toTheEnd: true,
       direction: "left",
       enemyType: 0,
-      enemySpeed: 0
+      enemySpeed: 0,
+      showSuperHelp: false
     };
 
     this.handleClickStartButton = this.handleClickStartButton.bind(this);
@@ -50,7 +51,8 @@ class Game extends React.Component {
     this.setState({
       gameState: 1,
       kilo: 0,
-      toTheEnd: true
+      toTheEnd: true,
+      showSuperHelp: false
     });
 
     this.gameTick(true);
@@ -74,6 +76,13 @@ class Game extends React.Component {
         var direction = this.state.direction;
         if (enemyY > carY && enemyY < (carY + 220) && enemyDirection === direction) {
           this.gameOver();
+        }
+
+        if (!this.state.showSuperHelp && kilo >= 2) {
+          this.renderSuperHelp();
+          this.setState({
+            showSuperHelp: true
+          });
         }
       }, 100);
     } else {
@@ -124,14 +133,26 @@ class Game extends React.Component {
   handleClickStartButton() {
     this.gameStart();
 
-    var help = document.createElement("P");
-    help.className = "help";
-    help.innerHTML = "你是逃犯，方向键控制左右";
+    var startHelp = document.createElement("P");
+    startHelp.className = "start-help help";
+    startHelp.innerHTML = "你是逃犯，方向键控制左右";
     var road = document.getElementById("road");
-    road.appendChild(help);
+    road.appendChild(startHelp);
 
-    help.addEventListener("webkitAnimationEnd", () => {
-      road.removeChild(help);
+    startHelp.addEventListener("webkitAnimationEnd", () => {
+      road.removeChild(startHelp);
+    });
+  }
+
+  renderSuperHelp() {
+    var superHelp = document.createElement("P");
+    superHelp.className = "super-help help";
+    superHelp.innerHTML = "空格键开启超神模式！";
+    var road = document.getElementById("road");
+    road.appendChild(superHelp);
+
+    superHelp.addEventListener("webkitAnimationEnd", () => {
+      road.removeChild(superHelp);
     });
   }
 
