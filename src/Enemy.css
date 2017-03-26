@@ -41,7 +41,7 @@
 .enemy.speed2 {
 	-webkit-animation: speed 2.5s linear;
 }
-@-webkit-keyframes speed{
+@-webkit-keyframes speed {
 	100%{-webkit-transform: translateY(1000px);}
 }
 
@@ -51,4 +51,16 @@
 
 .crashed .enemy {
 	-webkit-animation-play-state: paused;
+}
+
+.enemy.left .bounced {
+    -webkit-transition: -webkit-transform 1s ease-out;
+    -webkit-transform: translateX(-80px) rotate(-150deg);
+    -webkit-transform-origin: left bottom;
+}
+
+.enemy.right .bounced {
+    -webkit-transition:-webkit-transform 1s ease-out;
+    -webkit-transform: translateX(80px) rotate(150deg);
+    -webkit-transform-origin: right bottom;
 }

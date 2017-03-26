@@ -11,6 +11,9 @@
     -webkit-animation: roadRun 0.3s linear infinite;
 }
 
+.super-mode .roadRun {
+	-webkit-animation: roadRun .1s linear infinite;
+}
 @-webkit-keyframes roadRun {
     100%{-webkit-transform: translateY(800px);}
 }

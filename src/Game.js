@@ -17,7 +17,9 @@ class Game extends React.Component {
       direction: "left",
       enemyType: 0,
       enemySpeed: 0,
-      showSuperHelp: false
+      canBeSuper: false,
+      superMode: false,
+      enemyBounced: false
     };
 
     this.handleClickStartButton = this.handleClickStartButton.bind(this);
@@ -32,6 +34,20 @@ class Game extends React.Component {
             break;
           case 39:
             this.setState({direction : "right"});
+            break;
+          case 32:
+            if (this.state.canBeSuper) {
+              this.setState({
+                superMode: true,
+                canBeSuper: false
+              });
+              
+              setTimeout(() => {
+                this.setState({
+                  superMode : false
+                });
+              }, 5000);
+            }
             break;
           default:
             break;
@@ -52,7 +68,9 @@ class Game extends React.Component {
       gameState: 1,
       kilo: 0,
       toTheEnd: true,
-      showSuperHelp: false
+      canBeSuper: false,
+      superMode: false,
+      enemyBounced: false
     });
 
     this.gameTick(true);
@@ -64,6 +82,7 @@ class Game extends React.Component {
       var kilo = 0, enemy = document.getElementById("enemy"), carY = 620, enemyY = 0;
       HeroTick = setInterval(() => {
         kilo += 0.01;
+        kilo = Math.round(kilo * 100) / 100;
         this.setState({
           kilo: kilo
         });
@@ -75,19 +94,35 @@ class Game extends React.Component {
         var enemyDirection = this.state.enemyDirectionNum === 1 ? "right" : "left";
         var direction = this.state.direction;
         if (enemyY > carY && enemyY < (carY + 220) && enemyDirection === direction) {
-          this.gameOver();
+          if (!this.state.superMode) {
+            this.gameOver();
+          } else {
+            this.knockDown();
+          }
         }
 
-        if (!this.state.showSuperHelp && kilo >= 2) {
+        if (!this.state.canBeSuper && kilo % 2 === 0) {
           this.renderSuperHelp();
           this.setState({
-            showSuperHelp: true
+            canBeSuper: true
           });
         }
       }, 100);
     } else {
       clearInterval(HeroTick);
     }
+  }
+
+  knockDown() {
+    this.setState({
+      enemyBounced: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        enemyBounced: false
+      });
+    }, 1000);
   }
 
   gameOver() {
@@ -158,24 +193,29 @@ class Game extends React.Component {
 
   render() {
     var boardClassName = null;
-    if(this.state.gameState !== -1) {
-      boardClassName = "board";
-    } else {
+    if(this.state.gameState === -1) {
       boardClassName = "board crashed";
+    } else if (this.state.superMode) {
+      boardClassName = "board super-mode";
+    } else {
+      boardClassName = "board";
     }
+
     var enemyDirection = this.state.enemyDirectionNum === 1 ? "right" : "left";
 
     return (
       <div id="board" className={boardClassName}>
         <RoadBed gameState={this.state.gameState} />
         <div id="road" className={this.state.gameState ? "road play" : "road"}>
-          <Hero direction={this.state.direction} />
+          <Hero
+            direction={this.state.direction} />
           <Enemy
             gameState={this.state.gameState}
             enemyDirection={enemyDirection}
             toTheEnd={this.state.toTheEnd}
             enemyType={this.state.enemyType}
-            enemySpeed={this.state.enemySpeed} />
+            enemySpeed={this.state.enemySpeed}
+            enemyBounced={this.state.enemyBounced} />
         </div>
         <span className={this.state.gameState ? "start hide" : "start"} onClick={this.handleClickStartButton} />
         <span className="kilo">{this.state.kilo.toFixed(2)}</span>

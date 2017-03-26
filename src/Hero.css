@@ -47,6 +47,21 @@
     background: url(/heroDied.png) no-repeat;
 }
 
-.crashed .hero .light{
+.crashed .hero .light {
+    display: none;
+}
+
+.super-mode .hero .body {
+    -webkit-animation: heroSuper 0.1s ease infinite;
+    background: url(/heroSuper.png) no-repeat 8px 0px;
+    height: 176px;
+}
+@-webkit-keyframes heroSuper {
+    0%{opacity: 1;}
+    50%{opacity: 0.7;}
+    100%{opacity: 1;}
+}
+
+.super-mode .hero .light {
     display: none;
 }
